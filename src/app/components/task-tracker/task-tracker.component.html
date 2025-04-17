@@ -1,0 +1,35 @@
+<div style="max-width: 400px; margin: auto; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); background: #fff;">
+    <h3>Task Tracker</h3>
+  
+    <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+      <input type="text" formControlName="title" placeholder="Task title" style="width: 100%; padding: 6px; margin-bottom: 0.5rem;" />
+      <div>
+        <label>
+          <input type="checkbox" formControlName="completed" /> Completed
+        </label>
+      </div>
+      <button type="submit" [disabled]="!taskForm.value">Add Task</button>
+    </form>
+  
+    <div style="margin-top: 1rem;">
+      <label for="filter">Filter:</label>
+      <select id="filter" [(ngModel)]="filter">
+        <option>All</option>
+        <option>Completed</option>
+        <option>Incomplete</option>
+      </select>
+    </div>
+  
+    <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+      <li *ngFor="let task of filteredTasks; let i = index" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <span>
+          <span [style.textDecoration]="task.completed ? 'line-through' : 'none'">
+            {{ task.title }}
+          </span>
+          <span *ngIf="task.completed">✔️</span>
+        </span>
+        <button (click)="deleteTask(i)" style="background-color: #007bff; color: white; border: none; padding: 4px 8px; border-radius: 4px;">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
