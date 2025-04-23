@@ -9,6 +9,11 @@ import { TaskTrackerComponent } from './components/task-tracker/task-tracker.com
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { CounterComponent } from './components/counter/counter.component';
+import { EffectsModule } from '@ngrx/effects';
+import { counterReducer } from './state/counter.reducer';
+import { CounterEffects } from './state/counter.effects';
 
 @NgModule({
   declarations: [
@@ -16,14 +21,17 @@ import { HttpClientModule } from '@angular/common/http';
     TodoListComponent,
     TaskTrackerComponent,
     ProductListComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({count: counterReducer}),
+    // EffectsModule.forRoot([CounterEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
